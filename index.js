@@ -181,7 +181,9 @@ export default function() {
         nw: directionNorthWest,
         ne: directionNorthEast,
         sw: directionSouthWest,
-        se: directionSouthEast
+        se: directionSouthEast,
+        c:  directionCenter,
+        cn:  directionCenterNorth
       }),
       directions = directionCallbacks.keys()
 
@@ -246,6 +248,22 @@ export default function() {
     return {
       top:  bbox.se.y,
       left: bbox.se.x
+    }
+  }
+
+  function directionCenter() {
+    var bbox = getScreenBBox(this)
+    return {
+      top: (bbox.nw.y + bbox.se.y - node.offsetHeight) / 2,
+      left: (bbox.nw.x + bbox.se.x - node.offsetWidth) / 2
+    }
+  }
+
+  function directionCenterNorth() {
+    var bbox = getScreenBBox(this)
+    return {
+      top: (bbox.nw.y + bbox.se.y) / 2 - node.offsetHeight,
+      left: (bbox.nw.x + bbox.se.x - node.offsetWidth) / 2
     }
   }
 
